@@ -58,11 +58,11 @@ router.get('/', requireAuth, async (req: AuthRequest, res) => {
 
 router.delete('/:id', requireAuth, async (req: AuthRequest, res) => {
     try {
-        const invoice = await prisma.invoice.findUnique({ where: { id: req.params.id } });
+        const invoice = await prisma.invoice.findUnique({ where: { id: req.params.id as string } });
         if (!invoice || invoice.userId !== req.user!.userId) {
             return res.status(403).json({ error: 'Interdit' });
         }
-        await prisma.invoice.delete({ where: { id: req.params.id } });
+        await prisma.invoice.delete({ where: { id: req.params.id as string } });
         res.json({ success: true });
     } catch (error) {
         res.status(500).json({ error: 'Failed' });
