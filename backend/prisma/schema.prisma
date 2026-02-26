@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String             @id @default(uuid())
+  email               String             @unique
+  passwordHash        String
+  fullName            String
+  companyName         String
+  currency            String             @default("EUR")
+  industry            String
+  legalStatus         String             // SARL, SAS, etc.
+  emailVerified       Boolean            @default(false)
+  failedLoginAttempts Int                @default(0)
+  lockedUntil         DateTime?
+  lastLoginAt         DateTime?
+  plan                String             @default("FREE")
+  invoices            Invoice[]
+  tokens              VerificationToken[]
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+}
+
+model VerificationToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  type      String   // VERIFY_EMAIL or RESET_PASSWORD
+  expiresAt DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Invoice {
+  id              String   @id @default(uuid())
+  vendor          String
+  date            DateTime
+  amountHT        Float
+  amountTTC       Float
+  tax             Float
+  currency        String   @default("EUR")
+  description     String?
+  category        String   // Operationnelle, Financiere, Exceptionnelle
+  expenseType     String   // abonnement, ponctuelle, recurrente
+  confidenceScore Int      @default(100)
+  fileUrl         String?  // S3 URL
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

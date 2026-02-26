@@ -1,0 +1,170 @@
+.container {
+    padding: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.title {
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.subtitle {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Upload Zone */
+.uploadZone {
+    border: 2px dashed var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xxl);
+    text-align: center;
+    background-color: var(--color-bg-card);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.uploadZone:hover {
+    background-color: var(--color-primary-light);
+}
+
+.uploadIcon {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.uploadText {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.uploadHint {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Loading state */
+.loadingState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xxl);
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+    color: var(--color-primary);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Invoices List */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.invoiceCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.invoiceInfo {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.vendor {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    display: block;
+}
+
+.date {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.categoryTag {
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.tag-Opérationnelle {
+    background-color: rgba(79, 70, 229, 0.1);
+    color: #4F46E5;
+}
+
+.tag-Financière {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+}
+
+.tag-Exceptionnelle {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #F59E0B;
+}
+
+.amounts {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.amount {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--color-text-primary);
+}
+
+.tax {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+    .invoiceCard {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .amounts {
+        text-align: left;
+        flex-direction: row;
+        align-items: baseline;
+        gap: var(--spacing-sm);
+    }
+
+    .invoiceInfo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+}
